@@ -1,0 +1,592 @@
+$main:#e67e22;
+
+@mixin query($bp){
+    @if($bp == tabp){
+        @media only screen and(max-width:900px){@content};
+    }
+    @if($bp == cp){
+        @media only screen and(max-width:700px){@content};
+    }
+    @if($bp == scp){
+        @media only screen and(max-width:500px){@content};
+    }
+}
+
+*,
+*::before,
+*::after{
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    box-sizing: border-box;
+
+    @include query(tabp){
+        font-size: 90%;
+    }
+    @include query(cp){
+        font-size: 75%;
+    }
+    @include query(scp){
+        font-size: 70%;
+    }
+}
+
+body{
+    font-family: 'Lato',sans-serif;
+    line-height: 1.5;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+li{
+    list-style: none;
+}
+
+.title{
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    font-weight: 300;
+    text-align: center;
+
+    &::after{
+        content: '';
+        width: 100px;
+        height: 2px;
+        background-color: $main;
+        margin: 1rem auto;
+        display: block;
+    }
+
+    @include query(tabp){
+        font-size:2rem;
+    }
+    @include query(cp){
+        font-size:1.5rem;
+    }
+}
+
+.lead{
+    width: 70%;
+    margin: 0 auto;
+    color: gray;
+    font-size: 1.15rem;
+
+    @include query(tabp){
+        width: 100%;
+    }
+}
+.container{
+    width: 80%;
+    margin: 0 auto;
+}
+.u-mr-1{margin-right: 1rem;}
+.u-py-1{padding: 1rem 0;}
+.u-py-2{padding: 2rem 0;}
+.u-py-3{padding: 4rem 0;}
+.u-py-4{padding: 6rem 0;}
+.u-mb-1{margin-bottom: 1rem;}
+.u-mb-2{margin-bottom: 2rem;}
+.u-mb-3{margin-bottom: 4rem;}
+.u-mb-4{margin-bottom: 6rem;}
+.btn{
+    font-size: 1.3rem;
+    background-color: lime;
+    padding: 0.6rem 2rem;
+    border-radius: 2rem;
+    font-weight: 300;
+    border: 1px solid $main;
+    transition: 300ms ease;
+    display: inline-block;
+    &--fill{
+        background-color: $main;
+        border-color: transparent;
+        color: white;
+        &:hover{
+            background-color: darken($main,10%);
+        }
+    }
+
+    &--hollow{
+        background-color: transparent;
+        color: $main;
+
+        &:hover{
+            background-color: $main;
+            color: white;
+        }
+        
+    }
+}
+
+.bg-light{
+    background-color: whitesmoke;
+}
+
+.header{
+    min-height: 100vh;
+    background-image: linear-gradient(rgba(black,0.7),rgba(black,0.8)),url(/img/hero.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    position: relative;
+    padding: 1rem 0;
+    display: grid;
+    align-items: center;
+    color: white;
+    &__hero{
+        width: 80%;
+        margin: 0 auto;
+        margin-top: 2rem;
+    }
+
+    &__title{
+        font-size: 3rem;
+        font-weight: 300;
+        margin-bottom: 1.5rem;
+    }
+
+    &__sub{
+        display: block;
+    }
+}
+
+.nav{
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    align-items: center;
+    color: white;
+    padding: 1rem 0;
+    &__logo{
+        width: 6.25rem;
+        height: 6.25rem;
+    }
+
+    &__list{
+        display: flex;
+        align-items: center;
+        @include query(tabp){
+            display: none;
+        }
+    }
+
+    &__link{
+        text-transform: uppercase;
+        font-size: 1.3rem;
+        display: inline-block;
+        margin: 0 1rem;
+        font-weight: 300;
+        border-bottom: 2px solid transparent;
+        padding-bottom: 10px;
+        transition: 300ms;
+        &:hover{
+            border-color: $main;
+        }
+    }
+}
+
+.cards{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-gap: 2rem;
+
+    @include query(tabp){
+        grid-template-columns: 1fr;
+    }
+}
+
+.card{
+    &__icon{
+        color: $main;
+    }
+
+    &__title{
+        font-size: 1.3rem;
+        text-transform: uppercase;
+        font-weight: 300;
+        margin-bottom: 0.5rem;
+    }
+
+    &__desc{
+        font-size: 1.1rem;
+        color: gray;
+    }
+}
+
+.gallery{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(25%,1fr));
+
+    &__cover{
+        overflow: hidden;
+    }
+    &__img{
+        width: 100%;
+        display: block;
+        height: 100%;
+        object-position: center;
+        object-fit: cover;
+        filter: brightness(70%);
+        transform: scale(1.15);
+        transition: 300ms ease;
+        &:hover{
+            filter: brightness(100%);
+            transform: scale(1.02);
+        }
+    }
+}
+
+.how-it-works{
+    .container{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        grid-gap: 6rem;
+        justify-items: center;
+
+        @include query(tabp){
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__cover{
+        width: max-content;
+        justify-self: end;
+        @include query(tabp){
+            justify-self: center;
+        }
+    }
+
+    &__img{
+        display: block;
+        max-width: 200px;
+        height: auto;
+        object-fit: cover;
+    }
+
+    &__step{
+        font-size: 1.2rem;
+        color: gray;
+        margin-bottom: 2rem;
+        display: flex;
+        font-weight:300;
+        align-items: center;
+    }
+
+    &__num{
+       border: 2px solid currentColor;
+       color: $main;
+       font-size: 2rem;
+       border-radius: 50%; 
+       padding: 0 16px;
+       margin-right: 1rem;
+    }
+
+    &__span{
+        display: inline-block;
+    }
+
+    &__logos{
+        display: flex;
+        align-items: center;
+    }
+
+    &__logo{
+        width: auto;
+        height: 3rem;
+
+        &:first-child{
+            margin-right: 0.5rem;
+        }
+    }
+}
+
+.places{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-gap: 2rem;
+
+    @include query(tabp){
+        grid-template-columns: 1fr;
+    }
+}
+
+.place{
+    &__img{
+        width:100%;
+        display:block;
+        margin-bottom: 1rem;
+    }
+
+    &__title{
+        font-size: 1.5rem;
+        text-transform: uppercase;
+        font-weight:300;
+        margin-bottom: 0.5rem;
+    }
+
+    &__stat{
+        margin-bottom: 0.75rem;
+        display: flex;
+        font-size: 1.1rem;
+        align-items: center;
+        color: gray;
+        font-weight: 300;
+
+        &:last-child{
+            display: inline-block;
+            color: $main;
+            
+        }
+    }
+
+    &__icon{
+        color: $main;
+        font-size: 1.5rem;
+        margin-right: 1rem;
+    }
+}
+
+.customers{
+    background-image: linear-gradient(rgba(black,0.7)),url(/img/back-customers.jpg);
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    color: white;
+
+    .container{
+        margin-top: 3rem;
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        grid-gap: 2rem;
+
+        @include query(tabp){
+            grid-template-columns: 1fr;
+        }
+    }
+}
+
+.testimony{
+    font-style: italic;
+    position: relative;
+    font-size: 1.2rem;
+    font-weight: 300;
+    &::before{
+        content: open-quote;
+        font-size: 6rem;
+        position: absolute;
+        top: -3rem;
+        left:-2rem;
+        line-height: 1;
+        font-weight: 300;
+    }
+
+    &::after{
+        content:close-quote;
+        opacity: 0;
+    }
+    &__img{
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 1rem;
+    }
+
+    &__user{
+        margin-top: 1rem;
+        display: flex;
+        align-items: center;
+        font-style: normal;
+    }
+}
+
+.offer-cards{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 2rem;
+    margin-top: 2rem;
+    justify-items: center;
+
+    @include query(tabp){
+        grid-template-columns: 1fr;
+    }
+}
+
+.offer-card{
+    display: grid;
+    grid-gap:1rem;
+    background-color: white;
+    width: 100%;
+    padding: 0 1rem;
+    color: gray;
+    box-shadow: 0 0 1rem rgba(black,0.2);
+    border-radius: 3px;
+    min-height: 380px;
+    & > *:not(:last-child){
+        border-bottom: 1px solid gray;
+        margin: 0  -1rem;
+    }
+    &__price{
+        color: $main;
+        font-weight: 300;
+
+      span{
+        font-size: 4rem;
+      }
+    }
+
+    &__title{
+        font-size: 1.5rem;
+        text-transform: uppercase;
+        font-weight: 300;
+    }
+
+    &__list{
+        padding: 0 1rem;
+        padding-bottom: 1rem;
+        margin: 0 auto;
+        font-weight: 300;
+    }
+
+    &__icon{
+        color: $main;
+        margin-right: 1rem;
+        font-size: 0.8rem;
+        
+    }
+
+    .hide{
+        opacity: 0;
+    }
+
+    &__head{
+        padding: 1rem;
+        background-color: ghostwhite;
+    }
+
+    .btn{
+        margin: 0 auto;
+        display: block;
+        width: max-content;
+    }
+
+    .btn--fill{
+        color: white;
+    }
+
+    &__item{
+        font-size: 1.2rem;
+    }
+
+    &__bot{
+        padding: 1rem;
+    }
+}
+
+.contact{
+
+}
+
+.form{
+    width: 50%;
+    margin: auto;
+    display: grid;
+    grid-gap: 1rem;
+    color: gray;
+
+    .btn{
+        justify-self: center;
+    }
+
+    &__field{
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        align-items: flex-start;
+
+        @include query(tabp){
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__label{
+        margin-right: 1rem;
+        font-size: 1.2rem;
+    }
+
+    &__input{
+        width: 100%;
+        flex: 1;
+        font-size: 1.1rem;
+        padding: 0.5rem;
+    }
+
+    [type='checkbox']{
+        width: max-content;
+        margin-right: 1rem;
+    }
+
+    textarea{
+        height: 120px;
+    }
+
+    input,textarea,select{
+        border-radius: 5px;
+        border: 1px solid gray;
+        &:focus,&:active{
+            outline: none;
+            border: 1px solid $main;
+        }
+    }
+}
+
+.footer{
+    background-color: #333333;
+    color: gray;
+
+    .container{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(2,1fr);
+        grid-gap: 2rem;
+
+        @include query(cp){
+            grid-template-columns: 1fr;
+            justify-items: center;
+        }
+    }
+
+    ul{
+        display: flex;
+    }
+
+    li{
+        margin-right:1rem;
+        cursor: pointer;
+
+        &:hover{
+            color: white;
+        }
+    }
+
+    .social{
+        justify-self: end;
+        @include query(cp){
+            justify-self: center;
+        }
+    }
+
+    &__note{
+        grid-column: 1/-1;
+        text-align: center;
+    }
+}
